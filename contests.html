@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Algorithm Quest — Roadmap CP 2025/2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0e16;
+            --surface: #111826;
+            --surface-2: #141d2e;
+            --border: #232f42;
+            --text: #eef2f8;
+            --text-dim: #8b97ac;
+            --text-faint: #4c586e;
+            --spine: #20293a;
+
+            --newbie: #8b95a5;
+            --pupil: #3fb95f;
+            --specialist: #22c3d6;
+            --expert: #4c8bf5;
+            --master: #a371f7;
+            --intl: #ff9f45;
+            --grandmaster: #f8515b;
+            --legendary: #ffcb3d;
+
+            --accent: #22e0c9;
+            color-scheme: dark;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background:
+                radial-gradient(ellipse 800px 420px at 12% 0%, rgba(34, 224, 201, 0.07), transparent 60%),
+                radial-gradient(ellipse 700px 460px at 100% 18%, rgba(255, 203, 61, 0.05), transparent 55%),
+                var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            overflow-x: hidden;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        ::selection {
+            background: rgba(34, 224, 201, 0.25);
+        }
+
+        /* ===================== HERO ===================== */
+        .hero {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 56px 24px 28px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-curve {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(560px, 90%);
+            opacity: .35;
+            pointer-events: none;
+        }
+
+        .eyebrow-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .72rem;
+            color: var(--accent);
+            background: rgba(34, 224, 201, 0.08);
+            border: 1px solid rgba(34, 224, 201, 0.25);
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-bottom: 18px;
+            position: relative;
+        }
+
+        .eyebrow-tag .dotpulse {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .eyebrow-tag .dotpulse {
+                animation: pulseDot 1.8s ease-in-out infinite;
+            }
+        }
+
+        @keyframes pulseDot {
+
+            0%,
+            100% {
+                opacity: 1;
+                box-shadow: 0 0 0 0 rgba(34, 224, 201, .5);
+            }
+
+            50% {
+                opacity: .6;
+                box-shadow: 0 0 0 5px rgba(34, 224, 201, 0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: clamp(2rem, 6vw, 3.1rem);
+            line-height: 1.05;
+            margin: 0 0 14px;
+        }
+
+        .hero p.sub {
+            color: var(--text-dim);
+            font-size: 1rem;
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.55;
+        }
+
+        .stat-strip {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .stat-pill {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 18px;
+            min-width: 120px;
+        }
+
+        .stat-pill .num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--text);
+        }
+
+        .stat-pill.accent .num {
+            color: var(--accent);
+        }
+
+        .stat-pill.gold .num {
+            color: var(--legendary);
+        }
+
+        .stat-pill .lbl {
+            font-size: .7rem;
+            color: var(--text-faint);
+            margin-top: 2px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* ===================== TOOLBAR ===================== */
+        .toolbar {
+            max-width: 900px;
+            margin: 34px auto 0;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 9px 16px;
+            flex: 1 1 220px;
+            max-width: 320px;
+        }
+
+        .search-wrap svg {
+            flex-shrink: 0;
+            color: var(--text-faint);
+        }
+
+        .search-wrap input {
+            background: none;
+            border: none;
+            outline: none;
+            color: var(--text);
+            font-size: .86rem;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .search-wrap input::placeholder {
+            color: var(--text-faint);
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            justify-content: center;
+        }
+
+        .chip {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .68rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: all .15s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .chip .sw {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .chip:hover {
+            color: var(--text);
+            border-color: var(--text-faint);
+        }
+
+        .chip.active {
+            color: var(--text);
+            background: var(--surface-2);
+            border-color: var(--chip-color);
+        }
+
+        .hint-row {
+            text-align: center;
+            margin-top: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .7rem;
+            color: var(--text-faint);
+        }
+
+        /* ===================== ROADMAP (HORIZONTAL) ===================== */
+        .roadmap-wrapper {
+            max-width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 70px 30px 50px;
+            margin-top: 20px;
+            cursor: grab;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .roadmap-wrapper.dragging {
+            cursor: grabbing;
+            user-select: none;
+        }
+
+        .roadmap-wrapper::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .roadmap-wrapper::-webkit-scrollbar-track {
+            background: var(--surface);
+            border-radius: 10px;
+        }
+
+        .roadmap-wrapper::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 10px;
+        }
+
+        .roadmap {
+            display: flex;
+            align-items: stretch;
+            position: relative;
+            width: max-content;
+            padding: 0 20px;
+        }
+
+        .spine-track {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--spine), var(--spine) 96%, transparent);
+            border-radius: 3px;
+            z-index: 0;
+            overflow: hidden;
+            top: 0;
+            /* repositioned via JS */
+        }
+
+        .spine-track::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 16px);
+            opacity: .55;
+            background-size: 60px 3px;
+            animation: flowRight 3.2s linear infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .spine-track::after {
+                animation: none;
+            }
+        }
+
+        @keyframes flowRight {
+            from {
+                background-position-x: 0;
+            }
+
+            to {
+                background-position-x: 120px;
+            }
+        }
+
+        .here-pin {
+            position: absolute;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .here-pin .ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid var(--bg);
+            box-shadow: 0 0 0 3px var(--accent);
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .here-pin .ring {
+                animation: ringPulse 1.6s ease-in-out infinite;
+            }
+        }
+
+        @keyframes ringPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 3px rgba(34, 224, 201, .9);
+            }
+
+            50% {
+                box-shadow: 0 0 0 8px rgba(34, 224, 201, 0);
+            }
+        }
+
+        .here-pin .tag {
+            position: absolute;
+            left: 0;
+            bottom: 22px;
+            transform: translateX(-50%);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .65rem;
+            color: var(--bg);
+            background: var(--accent);
+            padding: 3px 9px;
+            border-radius: 10px;
+            white-space: nowrap;
+            font-weight: 700;
+        }
+
+        .node-col {
+            width: 190px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .slot {
+            min-height: 118px;
+            display: flex;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .slot.top {
+            align-items: flex-end;
+            padding-bottom: 16px;
+        }
+
+        .slot.bottom {
+            align-items: flex-start;
+            padding-top: 16px;
+        }
+
+        .hex {
+            width: 38px;
+            height: 38px;
+            flex-shrink: 0;
+            clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0% 50%);
+            background: var(--surface-2);
+            border: 2px solid var(--tier-color, var(--text-faint));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .85rem;
+            box-shadow: 0 0 0 4px var(--bg);
+            cursor: pointer;
+            transition: transform .15s;
+        }
+
+        .hex:hover,
+        .hex:focus-visible {
+            transform: scale(1.12);
+            outline: none;
+        }
+
+        .node-col.done .hex {
+            background: rgba(63, 185, 95, 0.12);
+        }
+
+        .card {
+            width: 190px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--tier-color, var(--border));
+            border-radius: 10px;
+            padding: 12px 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color .15s, background .15s, transform .15s;
+        }
+
+        .card:hover,
+        .card:focus-visible {
+            background: var(--surface-2);
+            outline: none;
+            transform: translateY(-2px);
+        }
+
+        .node-col.dimmed {
+            opacity: .18;
+        }
+
+        .card .date-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .66rem;
+            color: var(--tier-color, var(--text-dim));
+        }
+
+        .card .name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: .92rem;
+            margin: 3px 0 2px;
+            color: var(--text);
+        }
+
+        .card .org {
+            font-size: .74rem;
+            color: var(--text-dim);
+        }
+
+        .card .status {
+            margin-top: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .66rem;
+        }
+
+        .status.ok {
+            color: var(--pupil);
+        }
+
+        .status.pending {
+            color: var(--text-faint);
+        }
+
+        .status.boss {
+            color: var(--legendary);
+            font-weight: 700;
+        }
+
+        /* ---- BOSS NODE ---- */
+        .node-col.boss {
+            width: 230px;
+        }
+
+        .node-col.boss .hex {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(160deg, #2b2306, #1a1608);
+            border: 3px solid var(--legendary);
+            font-size: 1.5rem;
+            box-shadow: 0 0 0 6px var(--bg), 0 0 30px rgba(255, 203, 61, 0.35);
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .node-col.boss .hex {
+                animation: bossGlow 2.4s ease-in-out infinite;
+            }
+        }
+
+        @keyframes bossGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 6px var(--bg), 0 0 24px rgba(255, 203, 61, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 0 6px var(--bg), 0 0 46px rgba(255, 203, 61, 0.65);
+            }
+        }
+
+        .node-col.boss .card {
+            width: 230px;
+            background: linear-gradient(160deg, rgba(255, 203, 61, 0.10), rgba(255, 203, 61, 0.02));
+            border: 1px solid rgba(255, 203, 61, 0.4);
+            border-radius: 14px;
+            padding: 16px 16px;
+        }
+
+        .node-col.boss .eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .64rem;
+            color: var(--legendary);
+        }
+
+        .node-col.boss .name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff9e0;
+        }
+
+        .node-col.boss .org {
+            color: #f3d98a;
+        }
+
+        .foot-note {
+            text-align: center;
+            color: var(--text-faint);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .72rem;
+            margin-top: 4px;
+            padding-bottom: 30px;
+        }
+
+        /* ===================== MODAL ===================== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 5, 9, 0.78);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            width: 100%;
+            max-width: 420px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.7);
+        }
+
+        .modal.boss {
+            border-color: var(--legendary);
+        }
+
+        .modal-top {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 12px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            font-size: 1.2rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        .modal-close:hover {
+            color: var(--text);
+            background: var(--surface-2);
+        }
+
+        .modal-body {
+            padding: 4px 26px 26px;
+        }
+
+        .modal-body .tier-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .7rem;
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            border: 1px solid currentColor;
+        }
+
+        .modal-body h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            margin: 10px 0 4px;
+        }
+
+        .modal.boss .modal-body h2 {
+            color: var(--legendary);
+        }
+
+        .modal-body .org {
+            color: var(--text-dim);
+            font-size: .9rem;
+            margin-bottom: 14px;
+        }
+
+        .kv {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 6px 14px;
+            font-size: .82rem;
+            margin-top: 6px;
+        }
+
+        .kv .k {
+            color: var(--text-faint);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .72rem;
+        }
+
+        .kv .v {
+            color: var(--text);
+        }
+
+        .verdict {
+            margin-top: 16px;
+            padding: 10px 13px;
+            border-radius: 8px;
+            font-size: .8rem;
+            border: 1px solid var(--border);
+            background: var(--surface-2);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .verdict.ok {
+            color: var(--pupil);
+            border-color: rgba(63, 185, 95, .35);
+        }
+
+        .verdict.pending {
+            color: var(--text-dim);
+        }
+
+        .verdict.boss {
+            color: var(--legendary);
+            border-color: rgba(255, 203, 61, .4);
+            background: rgba(255, 203, 61, .07);
+        }
+
+        .modal-desc {
+            margin-top: 14px;
+            color: var(--text-dim);
+            font-size: .87rem;
+            line-height: 1.55;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="hero">
+        <svg class="hero-curve" viewBox="0 0 560 120" fill="none">
+            <path d="M10 110 C 120 110, 160 20, 280 20 S 440 110, 550 15" stroke="url(#g1)" stroke-width="2"
+                stroke-linecap="round" />
+            <defs>
+                <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#22e0c9" />
+                    <stop offset="100%" stop-color="#ffcb3d" />
+                </linearGradient>
+            </defs>
+        </svg>
+        <div class="eyebrow-tag"><span class="dotpulse"></span> saison compétitive 2025 / 2026</div>
+        <h1 class="display">La roadmap des contests<br>de programmation compétitive</h1>
+        <p class="sub">Chaque étape de la saison, du premier contest jusqu'à notre événement à ENICarthage. Cliquez un
+            nœud pour voir les détails.</p>
+
+        <div class="stat-strip">
+            <div class="stat-pill">
+                <div class="num" id="statTotal">—</div>
+                <div class="lbl">contests</div>
+            </div>
+            <div class="stat-pill accent">
+                <div class="num" id="statDone">—</div>
+                <div class="lbl">déjà passés</div>
+            </div>
+            <div class="stat-pill gold">
+                <div class="num" id="statNext">—</div>
+                <div class="lbl">avant notre contest</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="toolbar">
+        <div class="search-wrap">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="7" />
+                <path d="m21 21-4.3-4.3" />
+            </svg>
+            <input id="searchInput" type="text" placeholder="chercher un contest, une école…">
+        </div>
+        <div class="legend" id="legend"></div>
+    </div>
+    <p class="hint-row">&lt;— glissez ou défilez horizontalement pour explorer la saison —&gt;</p>
+
+    <div class="roadmap-wrapper" id="roadmapWrapper">
+        <div class="roadmap" id="roadmap">
+            <div class="spine-track" id="spineTrack"></div>
+            <!-- nodes injected by JS -->
+        </div>
+    </div>
+
+    <p class="foot-note">// 20 étapes, une seule que vous ne devez pas rater — le 14 avril à ENICarthage 🏆</p>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modalCard">
+            <div class="modal-top">
+                <button class="modal-close" id="modalClose" aria-label="Fermer">&times;</button>
+            </div>
+            <div class="modal-body">
+                <span class="tier-tag" id="modalTier"></span>
+                <h2 id="modalTitle"></h2>
+                <div class="org" id="modalOrg"></div>
+                <div class="kv">
+                    <span class="k">DATE</span><span class="v" id="modalDate"></span>
+                </div>
+                <div class="verdict" id="modalVerdict"></div>
+                <p class="modal-desc" id="modalDesc"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ================= DATA ================= */
+        const TIERS = {
+            newbie: { label: "Newbie", color: "var(--newbie)" },
+            pupil: { label: "Pupil", color: "var(--pupil)" },
+            specialist: { label: "Specialist", color: "var(--specialist)" },
+            expert: { label: "Expert", color: "var(--expert)" },
+            master: { label: "Master", color: "var(--master)" },
+            intl: { label: "Intl Master", color: "var(--intl)" },
+            grandmaster: { label: "Grandmaster", color: "var(--grandmaster)" },
+            legendary: { label: "Legendary", color: "var(--legendary)" }
+        };
+
+        const RAW_CONTESTS = [
+            { date: "Septembre 2026", name: "Embedded CP Contest", org: "INSAT / National Robotics Week", tier: "specialist" },
+            { date: "23 Octobre 2026", name: "Pre-Xtreme", org: "ENSI x ENIT", tier: "pupil" },
+            {
+                date: "24-25 Octobre 2026", name: "IEEEXtreme 19.0", org: "ENSIT x SUP'COM / IEEE", tier: "grandmaster",
+                desc: "Le marathon mondial de 24h organisé par l'IEEE — des milliers d'équipes, tous fuseaux horaires confondus."
+            },
+            { date: "24-25 Octobre 2026", name: "CySolve - CP", org: "ENIG / IEEE CS", tier: "expert" },
+            { date: "23 Novembre 2026", name: "Taktik 1.0", org: "FST", tier: "newbie" },
+            { date: "30 Novembre 2026", name: "CodeQuest 3.0", org: "INSAT / ACM INSAT", tier: "pupil" },
+            { date: "Novembre 2026", name: "League of Coders 5.0", org: "ENIT / G2FOSS", tier: "specialist" },
+            { date: "Janvier 2027", name: "ENSTAByte 3.0", org: "ENSTAB", tier: "newbie" },
+            { date: "14 Février 2027", name: "ISI Contest", org: "ISI Ariana", tier: "pupil" },
+            { date: "14 Février 2027", name: "The Ares 1.0", org: "ISIMG Gabès", tier: "newbie" },
+            { date: "15 Février 2027", name: "Elmore Clash", org: "ISIMM", tier: "specialist" },
+            { date: "21 Février 2027", name: "CODEX 1.0", org: "SUP'COM", tier: "expert" },
+            { date: "11 Mars 2027", name: "Winter Cup 8.0", org: "INSAT / ACM INSAT", tier: "master" },
+            {
+                date: "27-28 Mars 2027", name: "TCPC 2026", org: "National / Universities", tier: "grandmaster",
+                desc: "Le championnat national tunisien de programmation compétitive — la route vers l'ICPC."
+            },
+            { date: "12 Avril 2027", name: "Shinobi 2.0", org: "ISIMS CPC", tier: "expert" },
+            {
+                date: "14 Avril 2027", name: "ENICar Coding Arena 2.0", org: "ENICarthage", tier: "legendary", isBoss: true,
+                desc: "Notre contest. Le boss fight de la saison à ENICarthage — algorithmique et résolution de problèmes sous pression, entre pairs venus de toute la Tunisie."
+            },
+            { date: "19 Avril 2027", name: "Code Clash 2.0", org: "ENISO", tier: "specialist" },
+            { date: "20 Avril 2027", name: "Code & Conquer 2.0", org: "ENSI", tier: "pupil" },
+            { date: "26 Avril 2027", name: "Hello World 6.0", org: "ENIS Sfax / IEEE CS", tier: "master" },
+            { date: "25 Août 2027", name: "EPT Solving Cup 6.0", org: "EPT / ACM EPT", tier: "intl" }
+        ];
+
+        /* ================= DATE PARSING (FR) ================= */
+        const MONTHS = { janvier: 0, fevrier: 1, mars: 2, avril: 3, mai: 4, juin: 5, juillet: 6, aout: 7, septembre: 8, octobre: 9, novembre: 10, decembre: 11 };
+        function stripAccents(s) { return s.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+        function parseFR(dateStr) {
+            const s = stripAccents(dateStr.toLowerCase());
+            let month = null;
+            for (const k in MONTHS) { if (s.includes(k)) { month = MONTHS[k]; break; } }
+            const yearMatch = s.match(/(20\d{2})/);
+            const dayMatch = s.match(/^(\d{1,2})/);
+            if (month === null || !yearMatch) return null;
+            const day = dayMatch ? parseInt(dayMatch[1], 10) : 1;
+            return new Date(parseInt(yearMatch[1], 10), month, day);
+        }
+
+        const now = new Date();
+        RAW_CONTESTS.forEach(c => {
+            c.parsed = parseFR(c.date);
+            c.isPast = c.parsed ? c.parsed < now : false;
+            c.daysLeft = c.parsed ? Math.ceil((c.parsed - now) / 86400000) : null;
+        });
+
+        const contests = [...RAW_CONTESTS].sort((a, b) => {
+            if (!a.parsed) return 1;
+            if (!b.parsed) return -1;
+            return a.parsed - b.parsed;
+        });
+
+        /* ================= RENDER ================= */
+        const roadmapEl = document.getElementById('roadmap');
+        const spineTrack = document.getElementById('spineTrack');
+
+        function statusHTML(c) {
+            if (c.isBoss) {
+                return c.isPast ? `<span class="status ok">✔ terminé</span>` : `<span class="status boss">🏆 J-${c.daysLeft}</span>`;
+            }
+            if (c.parsed === null) return `<span class="status pending">⏳ à venir</span>`;
+            return c.isPast ? `<span class="status ok">✔ AC</span>` : `<span class="status pending">⏳ J-${c.daysLeft}</span>`;
+        }
+
+        contests.forEach((c, i) => {
+            const col = document.createElement('div');
+            col.dataset.idx = i;
+            col.dataset.tier = c.tier;
+            col.className = 'node-col' + (c.isPast ? ' done' : '') + (c.isBoss ? ' boss' : '');
+
+            const cardInner = c.isBoss ? `
+      <div class="eyebrow">notre contest</div>
+      <div class="name display">${c.name}</div>
+      <div class="org">${c.org}</div>
+      <div class="date-tag mono">${c.date}</div>
+      ${statusHTML(c)}`
+     : 
+      `<div class="date-tag mono">${c.date}</div>
+      <div class="name display">${c.name}</div>
+      <div class="org">${c.org}</div>
+      ${statusHTML(c)}
+    `;
+
+            const isTop = i % 2 === 0;
+            const card = `<div class="card" tabindex="0" role="button" style="--tier-color:${TIERS[c.tier].color}">${cardInner}</div>`;
+
+            col.innerHTML = `
+    <div class="slot top">${isTop || c.isBoss ? card : ''}</div>
+    <div class="hex" style="--tier-color:${TIERS[c.tier].color}" tabindex="0" role="button">${c.isBoss ? '🏆' : (c.isPast ? '✔' : '○')}</div>
+    <div class="slot bottom">${isTop || c.isBoss ? '' : card}</div>
+  `;
+            roadmapEl.appendChild(col);
+            col.querySelectorAll('[role="button"]').forEach(el => {
+                el.addEventListener('click', () => openModal(i));
+                el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(i); } });
+            });
+        });
+
+        /* ================= SPINE + "YOU ARE HERE" PIN ================= */
+        function layoutSpineAndPin() {
+            document.querySelectorAll('.here-pin').forEach(p => p.remove());
+
+            const firstHex = roadmapEl.querySelector('.hex');
+            if (!firstHex) return;
+            const roadmapRect = roadmapEl.getBoundingClientRect();
+            const hexRect = firstHex.getBoundingClientRect();
+            const spineY = (hexRect.top + hexRect.height / 2) - roadmapRect.top;
+            spineTrack.style.top = spineY + 'px';
+
+            const dated = contests.filter(c => c.parsed);
+            if (!dated.length) return;
+
+            const cols = Array.from(roadmapEl.querySelectorAll('.node-col'));
+            function centerX(idx) {
+                const hex = cols[idx].querySelector('.hex');
+                const r = hex.getBoundingClientRect();
+                return (r.left + r.width / 2) - roadmapRect.left;
+            }
+
+            const firstDatedIdx = contests.findIndex(c => c.parsed);
+            const lastDatedIdx = contests.length - 1 - [...contests].reverse().findIndex(c => c.parsed);
+
+            let left;
+            if (now <= contests[firstDatedIdx].parsed) {
+                left = centerX(firstDatedIdx) - 50;
+            } else if (now >= contests[lastDatedIdx].parsed) {
+                left = centerX(lastDatedIdx) + 50;
+            } else {
+                let prevIdx = firstDatedIdx, nextIdx = lastDatedIdx;
+                for (let i = 0; i < contests.length - 1; i++) {
+                    if (!contests[i].parsed) continue;
+                    for (let j = i + 1; j < contests.length; j++) {
+                        if (!contests[j].parsed) continue;
+                        if (contests[i].parsed <= now && now <= contests[j].parsed) { prevIdx = i; nextIdx = j; }
+                        break;
+                    }
+                }
+                const t0 = contests[prevIdx].parsed.getTime();
+                const t1 = contests[nextIdx].parsed.getTime();
+                const frac = t1 === t0 ? 0 : (now.getTime() - t0) / (t1 - t0);
+                left = centerX(prevIdx) + frac * (centerX(nextIdx) - centerX(prevIdx));
+            }
+
+            const pin = document.createElement('div');
+            pin.className = 'here-pin';
+            pin.style.left = left + 'px';
+            pin.style.top = spineY + 'px';
+            pin.innerHTML = '<div class="tag">VOUS ÊTES ICI</div><div class="ring"></div>';
+            roadmapEl.appendChild(pin);
+        }
+
+        window.addEventListener('load', layoutSpineAndPin);
+        window.addEventListener('resize', () => { clearTimeout(window.__pinT); window.__pinT = setTimeout(layoutSpineAndPin, 150); });
+        setTimeout(layoutSpineAndPin, 60);
+
+        /* ================= DRAG TO SCROLL ================= */
+        const wrapper = document.getElementById('roadmapWrapper');
+        let isDown = false, startX = 0, scrollLeft = 0;
+        wrapper.addEventListener('mousedown', e => {
+            isDown = true; wrapper.classList.add('dragging');
+            startX = e.pageX - wrapper.offsetLeft; scrollLeft = wrapper.scrollLeft;
+        });
+        wrapper.addEventListener('mouseleave', () => { isDown = false; wrapper.classList.remove('dragging'); });
+        wrapper.addEventListener('mouseup', () => { isDown = false; wrapper.classList.remove('dragging'); });
+        wrapper.addEventListener('mousemove', e => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - wrapper.offsetLeft;
+            wrapper.scrollLeft = scrollLeft - (x - startX) * 1.6;
+        });
+
+        /* ================= STATS ================= */
+        document.getElementById('statTotal').textContent = contests.length;
+        document.getElementById('statDone').textContent = contests.filter(c => c.isPast).length;
+        const boss = contests.find(c => c.isBoss);
+        document.getElementById('statNext').textContent = boss && !boss.isPast ? ('J-' + boss.daysLeft) : (boss ? '✔' : '—');
+
+        /* ================= LEGEND / FILTER ================= */
+        const legendEl = document.getElementById('legend');
+        let activeTier = null;
+        Object.keys(TIERS).forEach(key => {
+            const t = TIERS[key];
+            const chip = document.createElement('button');
+            chip.className = 'chip';
+            chip.dataset.tier = key;
+            chip.style.setProperty('--chip-color', t.color);
+            chip.innerHTML = `<span class="sw" style="background:${t.color}"></span>${t.label}`;
+            chip.addEventListener('click', () => {
+                activeTier = (activeTier === key) ? null : key;
+                document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.dataset.tier === activeTier));
+                applyFilters();
+            });
+            legendEl.appendChild(chip);
+        });
+
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', applyFilters);
+
+        function applyFilters() {
+            const q = searchInput.value.trim().toLowerCase();
+            document.querySelectorAll('.node-col').forEach(col => {
+                if (col.classList.contains('boss')) return;
+                const idx = parseInt(col.dataset.idx, 10);
+                const c = contests[idx];
+                let visible = true;
+                if (activeTier && c.tier !== activeTier) visible = false;
+                if (q && !(c.name.toLowerCase().includes(q) || c.org.toLowerCase().includes(q) || c.date.toLowerCase().includes(q))) visible = false;
+                col.classList.toggle('dimmed', !visible);
+            });
+        }
+
+        /* ================= MODAL ================= */
+        const overlay = document.getElementById('modalOverlay');
+        const modalCard = document.getElementById('modalCard');
+
+        function openModal(idx) {
+            const c = contests[idx];
+            modalCard.classList.toggle('boss', !!c.isBoss);
+            document.getElementById('modalTitle').textContent = (c.isBoss ? '🏆 ' : '') + c.name;
+            document.getElementById('modalOrg').textContent = c.org;
+            document.getElementById('modalDate').textContent = c.date;
+            const tierEl = document.getElementById('modalTier');
+            tierEl.textContent = TIERS[c.tier].label;
+            tierEl.style.color = TIERS[c.tier].color;
+
+            const verdictEl = document.getElementById('modalVerdict');
+            if (c.isBoss) {
+                verdictEl.className = 'verdict boss';
+                verdictEl.textContent = c.isPast ? "✔ événement passé — merci d'être venus" :`🏆 MUST ATTEND — J-${c.daysLeft} avant le coup d'envoi`;
+            } else if (c.isPast) {
+                verdictEl.className = 'verdict ok';
+                verdictEl.textContent = "✔ Accepted — contest déjà passé";
+            } else {
+                verdictEl.className = 'verdict pending';
+                verdictEl.textContent = c.parsed ? `⏳ Pending — J-${c.daysLeft} avant le contest` : "⏳ Pending — date à confirmer";
+            }
+
+            document.getElementById('modalDesc').textContent = c.desc || (c.isBoss
+                ? "Le grand contest de programmation compétitive à ENICarthage."
+                : "Étape de la saison CP tunisienne — algorithmique, structures de données et résolution de problèmes sous pression.");
+
+            overlay.classList.add('show');
+        }
+        function closeModal() { overlay.classList.remove('show'); }
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+        overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+    </script>
+</body>
+
+</html>
